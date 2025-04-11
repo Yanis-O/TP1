@@ -3,3 +3,116 @@ git status : affiche les fichiers modifiés, en attente ou non d’un commit
 git diff : montre les différences entre les fichiers modifiés (non encore ajoutés)
 git diff --staged : montre les différences entre les fichiers ajoutés (staged) et le dernier commit
 git log : affiche l’historique des commits
+
+1) `git status` : état du dépôt  
+Cette commande permet de visualiser :
+- Les fichiers non suivis (untracked)
+- Les fichiers modifiés mais non ajoutés à l’index (staging area)
+- L’état de la branche (nom, commit courant…)
+
+Dans mon cas, sur la branche `develop` sans aucun commit, `git status` affiche :
+- Le fichier `README.md` comme "untracked"
+- Le message : **"Aucun commit pour l’instant sur develop"**
+
+2) Effet de `git add`  
+Avant `git add`, `README.md` est non suivi.  
+Après exécution de `git add` :
+- Il devient un **nouveau fichier suivi**, prêt à être commité
+- Il est placé dans la **staging area**
+
+Résultat de `git status` :
+Sur la branche develop
+Aucun commit pour l'instant
+Nouveau fichier : README.md
+
+3) `git add .`  
+Cette commande ajoute **tous les fichiers modifiés ou nouveaux** à la staging area.
+
+Exemple de `git status` après un `git add .` :
+Modifications qui seront validées :
+  - nouveau fichier : README.md
+  - modifié         : reponses.txt
+
+4) Premier commit  
+Commande utilisée :
+git commit -m "Initialisation du dépôt : ajout de README.md et reponses.txt"
+Le message est clair et décrit les fichiers ajoutés.  
+Il a fallu utiliser `git add` avant pour placer les fichiers dans l’index.
+
+5) `git log` : historique des commits  
+Permet d’afficher :
+- Le hash des commits
+- L’auteur, la date
+- Le message associé
+
+6) Différences entre `git diff` et `git diff --staged`  
+- `git diff` : affiche les modifications **non ajoutées** à la staging area
+- `git diff --staged` : montre les changements **ajoutés** à l’index, comparés au dernier commit
+
+7) Résumé des commandes utiles
+- `git show` : affiche les détails d’un commit (contenu modifié)
+- `git status` : montre l’état actuel des fichiers
+- `git diff` : compare les fichiers du répertoire de travail avec l’index
+- `git log` : affiche l’historique des commits
+
+8) Ajout puis suppression de fichier avec `git reset`
+Après `git add .` :
+- `fichier1.txt` et `brouillon.txt` sont ajoutés
+
+Après :
+git reset brouillon.txt
+Résultat :
+- `fichier1.txt` reste en staging area
+- `brouillon.txt` redevient non suivi
+
+9) Effet de `git reset brouillon.txt`
+- **Staging area** : `brouillon.txt` est retiré
+- **Répertoire de travail** : le fichier est toujours présent
+
+10) Vérifier que `brouillon.txt` n’est pas commité :
+Commande utilisée :
+git log --stat
+Résultat :
+- `brouillon.txt` **n’apparaît dans aucun commit**
+- Seul `reponses.txt` est listé → preuve que le reset a fonctionné
+
+11) Vérifications avant `push`
+Commandes utilisées :
+- `git status`
+- `git log`
+- `git remote -v`
+
+12) Vérifier que le `push` a réussi :
+Commande :
+git log --all --oneline --decorate
+Affiche les commits présents en local **et** sur le serveur distant (origin/develop).
+
+13) Clonage d’un projet GitHub
+Commande utilisée :
+git clone https://github.com/PaulineLam24/TP-Git.git
+
+14) Contenu du dépôt cloné :
+Commandes :
+ls
+git log --oneline
+
+Fichiers présents :
+- README.md
+- fichier1.txt
+- brouillon.txt
+- reponses.txt
+
+Commits (exemples) :
+- Ajout des réponses au TP1
+- Mon premier commit
+- Ajout du fichier fichier1.txt
+- Initialisation du projet
+
+15) Modifications entre les commits :
+- Ajout de README.md au début
+- Ajout de fichier1.txt et de reponses.txt au fil du TP
+
+Commandes utilisées :
+- git diff <commit1> <commit2>
+- git show <commit>
+- git log --oneline
