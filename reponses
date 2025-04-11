@@ -1,0 +1,5 @@
+git show : affiche le détail d’un commit (modifications, auteur, date, etc.)
+git status : affiche les fichiers modifiés, en attente ou non d’un commit
+git diff : montre les différences entre les fichiers modifiés (non encore ajoutés)
+git diff --staged : montre les différences entre les fichiers ajoutés (staged) et le dernier commit
+git log : affiche l’historique des commits
